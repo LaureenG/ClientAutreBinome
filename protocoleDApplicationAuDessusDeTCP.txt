@@ -1,0 +1,262 @@
+						----------------------------------
+						|    PROTOCOLE D'APPLICATION     |
+						----------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+	**Fonctions de l'API**
+ 
+Ajouter nom/surnom : 
+	Ajoute un surnom à une personne designée par son nom
+Modifier nom : 
+	Modifie le nom d'une personne
+Modifier surnom :
+	Modifie le surnom d'une personne
+Lister : 
+	Liste l'integralité des noms et surnoms
+Lister nom : 
+	Liste l'integralité des noms 
+Lister surnoms personne : 
+	Liste l'integralité des surnoms d'une personne identifiée par au moins un surnom 
+Lister surnoms : 
+	Liste l'integralité des surnoms
+Supprimer surnom : 
+	Supprime un surnom d'une personne
+Supprimer nom & surnom : 
+	Supprime le(s) surnom(s) et le nom d'une personne identifié par nom
+Deconnexion :
+	Déconnecte le client du serveur
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+	**Informations complémentaires**
+
+Type de Serialization :
+	Chaine de caractères au format JSON
+NAMEi et NICKNAMEi (avec i un entier naturel) :
+	Correspondent à des exemples de noms et de surnoms
+CODE :
+	Correspond à un code d'erreur basé sur le modèle des codes HTTP (http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP)
+ID :
+	Correspond à un identifiant unique de la requête construit à partir d'une fonction de hachage (ou bien de façon incrémentale)
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+	**Format des requêtes**
+
+Ajouter nom/surnom : 
+Question : 
+{
+	"requete":"ajouter_nom",
+	"parametre_nom": NAME,
+	"parametre_nouveau_nom": NAME2,
+	"id": ID
+}
+
+Reponse :         
+{
+	“code”: CODE,
+    	“id”: ID
+}
+
+___________________________________
+
+Modifier nom :
+Question : 
+{
+	"requete":"modifier_nom",
+	"parametre_nom": NAME,
+	"parametre_surnom": NAME2,
+	"id": ID
+}
+
+Reponse : 
+{
+    	“code”: CODE,
+    	“id”: ID
+}
+
+___________________________________
+
+Modifier surnom :
+Question : 
+{
+   	"requete":"modifier_surnom",
+    	"parametre_surnom": NICKNAME,
+	"parametre_nouveau_surnom": NICKNAME2,
+   	“id”: ID
+}  
+      
+Reponse : 
+{
+    	“code”: CODE,
+    	“id”: ID
+}
+
+___________________________________
+
+Lister : 
+Question :
+{
+     	"requete":"lister",
+     	"parametre":"tout",
+     	"id": ID
+}
+Reponse :
+{
+    	"reponse": [
+        {
+            	"nom": NAME1,
+            	"surnom": [
+                	NICKNAME11,
+                	NICKNAME12,
+                	...,
+                	NICKNAME1m
+            	]
+        },
+        {
+		"nom": NAME2,
+	   	"surnom": [
+		        NICKNAME21,
+		        NICKNAME22,
+		        ...,
+		        NICKNAME2m
+		]
+	},           
+        ... ,
+        {
+            	"nom": NAMEn,
+            	"surnom": [
+                	NICKNAMEn1,
+                	NICKNAMEn2,
+                	...,
+                	NICKNAMEnm
+            	]
+
+        }
+    	],
+    	"id": ID
+}
+
+___________________________________
+
+Lister nom : 
+Question :
+{
+        "requete":"lister",
+	"parametre":"nom",
+       	"id": ID
+}
+
+Reponse :
+{
+    	"reponse": [
+        {
+        	"nom": [
+        	        NAME1,
+                	NAME2,
+			...,
+			NAMEn
+            	]
+        }
+    	],
+    	"id": 5
+}
+
+___________________________________
+
+Lister surnom :
+Question :
+{
+        "requete":"lister",
+	"parametre":"surnom",
+        "id": ID
+}
+
+Reponse :
+{
+	"reponse": [
+	{
+		"surnom": [
+			NICKNAME1,
+	                NICKNAME2,
+			...,
+			NICKNAMEn
+        	]
+        }
+	],
+    	"id": ID
+}
+
+___________________________________
+
+Lister surnoms personne
+Question :
+{
+        "requete":"lister",
+	"parametre": NAME,
+        "id": ID
+}
+
+Reponse :
+{
+   	"reponse": [
+        {
+        	"surnom": [
+        	        NICKNAME1,
+        	        NICKNAME2,
+			...,
+			NICKNAMEn
+        	]
+        }
+    	],
+    	"id": ID
+}
+
+___________________________________
+
+Supprimer surnom :
+Question :
+{
+    	"requete":“supprimer_surnom”, 
+     	"parametre": NICKNAME,
+   	“id”: ID
+}
+
+Reponse : 
+{
+    	“code”: CODE,
+    	“id”: ID
+}
+
+___________________________________
+
+Supprimer nom & surnom :
+Question :
+{
+    	"requete“:"supprimer_nom”, 
+    	"parametre": NAME,
+   	“id”: ID
+}
+
+Reponse : 
+{
+    	“code”: CODE,
+    	“id”: ID
+}
+
+___________________________________
+
+Deconnexion :
+Question :
+{
+    	“requete” : "exit",
+    	“id”: ID
+}
+
+Reponse : 
+{
+    	“code”: CODE,
+    	“id”: ID
+}
+-------------------------------------------------------------------------------------------------------------------------------------
