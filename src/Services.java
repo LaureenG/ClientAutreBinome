@@ -1,6 +1,8 @@
+import connexion.Connexion;
+
 
 public class Services {
-
+	private static int id = 0;
 	public static String deleteNom(String string) { // "supprimer_nom"
 		// TODO : todo
 		return "";
@@ -27,8 +29,28 @@ public class Services {
 	}
 
 	public static String getAll() { // "lister" & p="tout"
-		// TODO : todo
-		return "";
+		String [] args = new String[4];
+		args[0] = "\"requete\" : \"lister\"";
+		args[1] = "\"parametre\" : \"tout\"";
+		args[2] = "\"id\" : "+ ++id +"";
+		args[3] = null;
+		String query = createQuery(args);
+		Connexion.getInstance().sendString(query);
+		return Connexion.getInstance().receiveString();
+	}
+
+	private static String createQuery(String[] args) {
+		String toRet = "{";
+		for(int i = 0 ; i < args.length ; i++) {
+			if(args[i]!=null) {
+				toRet += args[i];
+			}
+			if(i != args.length-1 && args[i+1] != null) {
+				toRet += ",";
+			}
+		}
+		toRet += "}\n";
+		return toRet;
 	}
 
 	public static String postSurname(String string, String string2) { // "ajouter_nom" & NAME & NAME2
@@ -50,31 +72,6 @@ public class Services {
 		// TODO : todo
 		return "";
 	}*/
-
-	private static String serviceName(int service) {
-		/*switch (service) {
-		case Service.DELETE_NAME:
-			return "DELETE_NAME";
-		case Service.DELETE_SURNAME:
-			return "DELETE_SURNAME";
-		case Service.GET_ALL:
-			return "GET_ALL";
-		case Service.GET_NAME:
-			return "GET_NAME";
-		case Service.GET_SURNAME:
-			return "GET_SURNAME";
-		case Service.POST_NAME:
-			return "POST_NAME";
-		case Service.POST_SURNAME:
-			return "POST_SURNAME";
-		case Service.PUT_SURNAME:
-			return "PUT_SURNAME";
-		default:
-			return "UNKNOWN_SERVICE";
-		}*/
-		// TODO : todo
-		return "";
-	}
 
 	public static String close() { // "exit"
 		// TODO : todo
