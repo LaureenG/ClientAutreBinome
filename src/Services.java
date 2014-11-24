@@ -3,6 +3,11 @@ import connexion.Connexion;
 public class Services {
     private static int id = 0;
 
+    /**
+     * Supprime le(s) surnom(s) et le nom d'une personne identifiée par nom.
+     * @param string nom à supprimer.
+     * @return une string representant la reponse a cette requete.
+     */
     public static String deleteNom(String string) { // "supprimer_nom"
         String args[] = new String[3];
         args[0] = "\"requete\" : \"supprimer_nom\"";
