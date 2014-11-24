@@ -93,7 +93,7 @@ public class Connexion {
 		try {
 			in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
-			while ((line = in.readLine()) != null) {
+			if ((line = in.readLine()) != null) {
 				ret += line;
 			}
 		} catch (IOException e1) {
